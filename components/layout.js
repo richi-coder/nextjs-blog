@@ -3,11 +3,14 @@ import styles from "./layout.module.css"
 import Link from "next/link";
 import Image from "next/image";
 import utilStyles from '../styles/utils.module.css';
+import Context, { AppContext } from "./Context";
+import { useContext } from "react";
 
 const name = 'richiCoder';
 export const siteTitle = 'Next.js Sample Website';
 
 export default function Layout({ children, home }) {
+    const context = useContext(AppContext)
     return (
         <div className={styles.container}>
             <Head>
@@ -58,7 +61,10 @@ export default function Layout({ children, home }) {
                     </>
                 )}
             </header>
-            <main>{children}</main>
+            <Context>
+                <main>{children}</main>
+                <div>{context}HEY</div>
+            </Context>
             {!home && (
                 <div className={styles.backToHome}>
                     <Link href="/">← Back to home</Link>
